@@ -20,13 +20,25 @@ public class ExampleTrackScroll_1 : MonoBehaviour
     // Scroll the main texture based on time
     [SerializeField] private float scrollSpeed = 0.5f;
 
+    [Tooltip("The invert scroll bool.")]
+    // Invert the scroll bool
+    [SerializeField] private bool invertScroll;
+
     // The offset float
     private float offset;
 
     // Update is called once per frame
     private void Update()
     {
-        offset = Time.time * scrollSpeed;
+        if (invertScroll)
+        {
+            offset = Time.time * -scrollSpeed;
+        }
+
+        else if (!invertScroll)
+        {
+            offset = Time.time * scrollSpeed;
+        }
 
         foreach (var _meshRenderer in _trackRenderers)
         {
