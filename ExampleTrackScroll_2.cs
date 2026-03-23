@@ -1,5 +1,5 @@
 /*
- * Unity: ExampleTrackScroll.cs
+ * Unity: ExampleTrackScroll_2.cs
  * Edits By: DeathwatchGaming
  * License: MIT
  */
@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ExampleTrackScroll : MonoBehaviour
+public class ExampleTrackScroll_2 : MonoBehaviour
 {
     [Header("Properties")]
 
@@ -28,9 +28,7 @@ public class ExampleTrackScroll : MonoBehaviour
     {
         offset = Time.time * scrollSpeed;
 
-        foreach (var _meshRenderer in _trackRenderers)
-        {
-            _meshRenderer.materials[0].mainTextureOffset = new Vector2(0f, offset);
-        }
+        _trackRenderers[0].material.mainTextureOffset = new Vector2(0f, offset);
+        _trackRenderers[1].material.mainTextureOffset = new Vector2(0f, offset);
     }
 }
