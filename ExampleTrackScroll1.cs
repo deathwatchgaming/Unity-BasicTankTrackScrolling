@@ -1,5 +1,5 @@
 /*
- * Unity: ExampleTrackScroll_1.cs
+ * Unity: ExampleTrackScroll1.cs
  * Edits By: DeathwatchGaming
  * License: MIT
  */
@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ExampleTrackScroll_1 : MonoBehaviour
+public class ExampleTrackScroll1 : MonoBehaviour
 {
     [Header("Properties")]
 
