@@ -29,16 +29,24 @@ public class ExampleTrackScroll3 : MonoBehaviour
     // Create a List of Tracks ie: Tracks and start with 2 track elements ie: [0,1]
     [SerializeField] private List<Track> _tracks = new List<Track>(new Track[2]);
 
+    [Tooltip("Set if using shader graph.")]
+    // Bool for if using shader graph
+    [SerializeField] private bool usingShaderGraph;
+
+    [Tooltip("Set the main texture for shader graph.")]
+    // String for setting the main texture for shader graph
+    [SerializeField] private string setMainTexture = "_Albedo_Map";
+
     [Tooltip("The scroll speed.")]
     // Scroll the main texture based on time
     [SerializeField] private float scrollSpeed = 0.5f;
 
     [Tooltip("The invert scroll left bool.")]
-    // Invert the left scroll bool
+    // Invert the scroll left bool
     [SerializeField] private bool invertScrollLeft;
 
     [Tooltip("The invert scroll right bool.")]
-    // Invert the right scroll bool
+    // Invert the scroll right bool
     [SerializeField] private bool invertScrollRight;
 
     // The offset float
@@ -75,7 +83,15 @@ public class ExampleTrackScroll3 : MonoBehaviour
                 }
             }
 
-            track.meshRenderer.materials[0].mainTextureOffset = new Vector2(0f, offset);
+            if (usingShaderGraph)
+            {
+                track.meshRenderer.materials[0].SetTextureOffset(setMainTexture, new Vector2(0f, offset));
+            }
+
+            else if (!usingShaderGraph)
+            {
+                track.meshRenderer.materials[0].mainTextureOffset = new Vector2(0f, offset);
+            }            
         }
     }
 }

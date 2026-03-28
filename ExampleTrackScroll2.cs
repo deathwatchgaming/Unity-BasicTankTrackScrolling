@@ -16,6 +16,14 @@ public class ExampleTrackScroll2 : MonoBehaviour
     // Create a List of MeshRenderers ie: Track Renderers and start with 2 empty track elements ie: [0,1]
     [SerializeField] private List<MeshRenderer> _trackRenderers = new List<MeshRenderer>(new MeshRenderer[2]);
 
+    [Tooltip("Set if using shader graph.")]
+    // Bool for if using shader graph
+    [SerializeField] private bool usingShaderGraph;
+
+    [Tooltip("Set the main texture for shader graph.")]
+    // String for setting the main texture for shader graph
+    [SerializeField] private string setMainTexture = "_Albedo_Map";
+
     [Tooltip("The scroll speed.")]
     // Scroll the main texture based on time
     [SerializeField] private float scrollSpeed = 0.5f;
@@ -57,7 +65,16 @@ public class ExampleTrackScroll2 : MonoBehaviour
             offset1 = Time.time * scrollSpeed;
         }
 
-        _trackRenderers[0].material.mainTextureOffset = new Vector2(0f, offset0);
-        _trackRenderers[1].material.mainTextureOffset = new Vector2(0f, offset1);
+        if (usingShaderGraph)
+        {
+            _trackRenderers[0].material.SetTextureOffset(setMainTexture, new Vector2(0f, offset0));
+            _trackRenderers[1].material.SetTextureOffset(setMainTexture, new Vector2(0f, offset1));            
+        }
+
+        else if (!usingShaderGraph)
+        {
+            _trackRenderers[0].material.mainTextureOffset = new Vector2(0f, offset0);
+            _trackRenderers[1].material.mainTextureOffset = new Vector2(0f, offset1);
+        }
     }
 }
