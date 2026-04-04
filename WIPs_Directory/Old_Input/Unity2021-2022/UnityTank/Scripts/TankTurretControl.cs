@@ -76,8 +76,7 @@ namespace UnityTank.Scripts
             else if (Cursor.lockState == CursorLockMode.Locked)
             {
                 // If the cursor is locked, get mouse input for controlling the turret and barrel
-                GetMouseInput();
-                
+                GetMouseInput();     
             }
         }
 
