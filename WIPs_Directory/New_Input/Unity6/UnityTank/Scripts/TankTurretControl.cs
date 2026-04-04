@@ -55,15 +55,12 @@ namespace UnityTank.Scripts
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            // Ensure the turret and barrel transforms are assigned
-            if (turretTransform == null || barrelTransform == null)
-            {
-                Debug.LogWarning("Turret or Barrel Transform is not assigned.");
-                return;
-            }
-
             // Initialize the new input system
             tankControls = new TankInputActions();
+
+            // Lock the cursor to the center of the screen and hide it for better control
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;            
         }
 
         // OnEnable is called when the object becomes enabled and active
