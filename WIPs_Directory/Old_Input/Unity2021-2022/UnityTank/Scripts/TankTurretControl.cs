@@ -65,7 +65,7 @@ namespace UnityTank.Scripts
             else if (Cursor.lockState == CursorLockMode.None)
             {
                 // If the cursor is not locked, check for mouse input to lock it again
-                if (Input.GetMouseButtonDown(0)) // Left mouse button to lock the cursor
+                if (Input.GetMouseButtonDown(1)) // Right mouse button to lock the cursor
                 {
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
