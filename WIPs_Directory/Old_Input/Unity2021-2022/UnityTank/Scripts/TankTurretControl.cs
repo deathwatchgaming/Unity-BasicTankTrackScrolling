@@ -84,7 +84,7 @@ namespace UnityTank.Scripts
         private void RotateTurret()
         {
             // Rotate the turret based on mouse input
-            turretTransform.Rotate(0, rotationInput * rotationSpeed * Time.deltaTime, 0);
+            turretTransform.Rotate(0, rotationInput * rotationSpeed * Time.fixedDeltaTime, 0);
         }
 
         // Method to lift the barrel based on mouse input
@@ -103,7 +103,7 @@ namespace UnityTank.Scripts
             }
 
             // Calculate the target angle based on input and clamp it within the specified limits
-            targetAngle = Mathf.Clamp(currentAngle + liftInput * liftSpeed * Time.deltaTime, minLiftAngle, maxLiftAngle);
+            targetAngle = Mathf.Clamp(currentAngle + liftInput * liftSpeed * Time.fixedDeltaTime, minLiftAngle, maxLiftAngle);
 
             // Apply the new angle to the barrel
             barrelTransform.localEulerAngles = new Vector3(targetAngle, 0, 0);

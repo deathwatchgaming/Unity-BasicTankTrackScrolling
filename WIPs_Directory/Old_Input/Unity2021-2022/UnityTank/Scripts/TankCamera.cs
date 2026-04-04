@@ -29,7 +29,7 @@ namespace UnityTank.Scripts
         [Tooltip("The camera distance determines how closely the camera follows the tank's position.")]
         [SerializeField] private float distance = 10.0f;
         [Tooltip("The camera height determines the height of the camera.")]
-        [SerializeField] private float height = 2.0f;
+        [SerializeField] private float height = 3.0f;
         [Tooltip("The rotation damping.")]
         [SerializeField] private float rotationDamping = 3.0f;
         [Tooltip("The height damping.")]
