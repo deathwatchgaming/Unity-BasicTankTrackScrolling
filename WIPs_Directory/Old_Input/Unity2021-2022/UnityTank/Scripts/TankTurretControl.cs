@@ -50,16 +50,47 @@ namespace UnityTank.Scripts
         // Store the mouse input as a Vector2 for easier handling
         private Vector2 moveInput;
 
-        // Awake is called when the script instance is being loaded
-        private void Awake()
-        {
-            // Lock the cursor to the center of the screen and hide it for better control
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
         // Update is called once per frame
         private void Update()
+        {
+            // Check if the Escape key is pressed to unlock the cursor and make it visible
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // Unlock the cursor and make it visible when the Escape key is pressed
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+
+            // Check if the cursor is not locked, and if so, check for mouse input to lock it again
+            else if (Cursor.lockState == CursorLockMode.None)
+            {
+                // If the cursor is not locked, check for mouse input to lock it again
+                if (Input.GetMouseButtonDown(0)) // Left mouse button to lock the cursor
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+            }
+
+            // If the cursor is locked, get mouse input for controlling the turret and barrel
+            else if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                // If the cursor is locked, get mouse input for controlling the turret and barrel
+                GetMouseInput();
+                
+            }
+        }
+
+        // FixedUpdate is called at a fixed interval and is independent of frame rate
+        private void FixedUpdate()
+        {
+            // Rotate the turret and lift the barrel based on mouse input
+            RotateTurret();
+            LiftBarrel();
+        }
+
+        // Method to get mouse input for rotating the turret and lifting the barrel
+        private void GetMouseInput()
         {
             // Get mouse input for rotating the turret and lifting the barrel
             moveInput.x = Input.GetAxis("Mouse X");
@@ -70,15 +101,7 @@ namespace UnityTank.Scripts
 
             // Get the vertical mouse input for lifting the barrel
             liftInput = moveInput.y;
-        }
-
-        // FixedUpdate is called at a fixed interval and is independent of frame rate
-        private void FixedUpdate()
-        {
-            // Rotate the turret and lift the barrel based on mouse input
-            RotateTurret();
-            LiftBarrel();
-        }
+        }        
 
         // Method to rotate the turret based on mouse input
         private void RotateTurret()
