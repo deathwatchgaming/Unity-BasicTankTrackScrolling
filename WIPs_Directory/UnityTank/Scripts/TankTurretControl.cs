@@ -36,6 +36,10 @@ namespace UnityTank.Scripts
         // Minimum angle the barrel can lift down from its initial position
         [SerializeField] private float minLiftAngle = -5f;
 
+        [Tooltip("Invert the vertical mouse input for lifting the barrel.")]
+        // Option to invert the vertical mouse input for lifting the barrel
+        [SerializeField] private bool invertMouseY = false;
+
         // Store the current and target angles for the barrel
         private float currentAngle = 0f;
         private float targetAngle = 0f;
@@ -103,6 +107,8 @@ namespace UnityTank.Scripts
         {
             // Get the vertical mouse input for lifting the barrel
             liftInput = mouseInputVector.y;
+
+            liftInput = invertMouseY ? -liftInput : liftInput; // Invert the input if the option is enabled
 
             // Calculate the new angle for the barrel
             currentAngle = barrelTransform.localEulerAngles.x;
