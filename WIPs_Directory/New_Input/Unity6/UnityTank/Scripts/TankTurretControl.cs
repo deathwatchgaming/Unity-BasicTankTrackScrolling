@@ -56,11 +56,7 @@ namespace UnityTank.Scripts
         private void Awake()
         {
             // Initialize the new input system
-            tankControls = new TankInputActions();
-
-            // Lock the cursor to the center of the screen and hide it for better control
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;            
+            tankControls = new TankInputActions();           
         }
 
         // OnEnable is called when the object becomes enabled and active
@@ -77,23 +73,61 @@ namespace UnityTank.Scripts
             tankControls.Disable();
         }
 
+        // Update is called once per frame
+        private void Update()
+        {
+            // Unlock the cursor and make it visible when the Escape key is pressed
+            if (Keyboard.current.escapeKey.wasPressedThisFrame) // equivalent to Input.GetKeyDown(KeyCode.Escape) // Escape key is used to unlock the cursor and make it visible
+            {
+                // Unlock the cursor and make it visible for UI interaction or exiting
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+
+            // Lock the cursor again when the left mouse button is pressed while the cursor is unlocked 
+            else if (Cursor.lockState == CursorLockMode.None)
+            {
+                if (Mouse.current.rightButton.wasPressedThisFrame) // equivalent to Input.GetMouseButtonDown(1) // Right mouse button is used to lock the cursor again
+                {
+                    // Lock the cursor to the center of the screen and hide it for better control
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+            }
+
+            // Check if the cursor is locked before processing input
+            else if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                // If the cursor is locked, get mouse input for controlling the turret and barrel
+                GetMouseInput();  
+            }
+        }
+
         // FixedUpdate is called at a fixed interval and is independent of frame rate
         private void FixedUpdate()
         {
-            // Get mouse input for rotation and lifting
-            mouseInputVector = tankControls.Tank.TurretMovement.ReadValue<Vector2>();
-
             // Rotate the turret and lift the barrel based on mouse input
             RotateTurret();
             LiftBarrel();
         }
 
+        // Method to get mouse input for rotating the turret and lifting the barrel
+        private void GetMouseInput()
+        {
+            // Read the Vector2 input from the new Input System
+            // Get mouse input for rotation and lifting
+            mouseInputVector = tankControls.Tank.TurretMovement.ReadValue<Vector2>();
+
+            // Store the horizontal mouse input for rotating the turret
+            rotationInput = mouseInputVector.x;
+
+            // Store the vertical mouse input for lifting the barrel
+            liftInput = mouseInputVector.y;
+        }       
+
         // Method to rotate the turret based on mouse input
         private void RotateTurret()
         {
-            // Get the horizontal mouse input for rotating the turret
-            rotationInput = mouseInputVector.x;
-
             // Rotate the turret based on mouse input
             turretTransform.Rotate(0, rotationInput * rotationSpeed * Time.fixedDeltaTime, 0);
         }
@@ -101,9 +135,6 @@ namespace UnityTank.Scripts
         // Method to lift the barrel based on mouse input
         private void LiftBarrel()
         {
-            // Get the vertical mouse input for lifting the barrel
-            liftInput = mouseInputVector.y;
-
             // Invert the lift input if the option is enabled
             liftInput = invertMouseY ? -liftInput : liftInput;
 
