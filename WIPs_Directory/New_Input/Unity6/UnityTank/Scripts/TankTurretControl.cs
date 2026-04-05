@@ -84,7 +84,7 @@ namespace UnityTank.Scripts
                 Cursor.visible = true;
             }
 
-            // Lock the cursor again when the left mouse button is pressed while the cursor is unlocked 
+            // Lock the cursor again when the right mouse button is pressed while the cursor is unlocked 
             else if (Cursor.lockState == CursorLockMode.None)
             {
                 if (Mouse.current.rightButton.wasPressedThisFrame) // equivalent to Input.GetMouseButtonDown(1) // Right mouse button is used to lock the cursor again
