@@ -1,1 +1,9 @@
 # Unity-BasicTankTrackScrolling
+
+Release Intentions Note:
+
+The intention of this release was to provide basic example tank track scrolling simply as a starting point as base simply that can that be used as starting point / base for folks to then as such continue on with and improve and expand upon. Originally the repo was simple some very basic and sparce example scripts just for the mindset of startoff points to wrap the mind on as far as basic scrolling, and supplied just the controller and camera as extras just in case folks wanted such as a base to add the scrolling at their leisure however they decided to implement it into such after getting inspiration from base example scripts. That is it, nothing more on original intent, this was never inteded to be considered completed nor provided as such. Due to a complaint from a user of having difficulties understanding what to do with the examples, I opted to remove those examples and just add a something similar to a the control script, again providing such a a basic base provided "as is" for folks to expand upon and improve to their desires. In stating such, if you opt to use such for example as a base and you make some improvements and expansions on such please do feel free to share with me and I may just perhaps opt to add any such improvements to the repo if and or when the situation may arise and free time allows.
+
+NOTE: This project was developed while / for using Unity 2021+ & 2022+ & Unity 6
+
+Note: currently I have not yet provided or written any docs for this as of yet as none of such was originally intended. If and or when I may find some free time perhaps I will add / write some simple basic setup text file or what not, but for now, this is "as is".... currentl;y have very limited free time and had not planned on doing much further on this as the original intent was stated as such...
