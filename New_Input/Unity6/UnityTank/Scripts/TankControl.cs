@@ -8,6 +8,7 @@
 
 // Note: Make sure to set up the wheel colliders and meshes correctly in the Unity Editor, and adjust the properties based on your tank's design and performance requirements for optimal results.
 // Note: This script is designed for use with Unity's new input system. If you are using the old Input System, you will need to modify the input handling code accordingly.
+// Note: For each wheel collider you need to edit the "Transform" for the "Position Y" and add "+0.15" to the value of what the wheel mesh value is. This is to ensure that the wheel mesh is visually aligned with the wheel collider for proper visuals during movement. Adjust this value as needed based on your specific tank model and wheel setup.
 
 // Import necessary namespaces
 using System;
