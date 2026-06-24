@@ -5,7 +5,7 @@ License: MIT (same as scripts)
 1. Project Setup
 
 - Use Unity 6
-- Install Input System package via Package Manager
+- Make sure you are using the "New" Input System
 - Add provided folder in Assets i.e.: Assets/UnityTank/
 - Scripts are housed in folder: Assets/UnityTank/Scripts
 - Input related scripts are housed in folder: Assets/UnityTank/Input
