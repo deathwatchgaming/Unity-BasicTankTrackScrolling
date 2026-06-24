@@ -81,7 +81,7 @@ namespace UnityTank.Scripts
             cameraRoot.position = Vector3.Lerp(cameraRoot.position, tankTransform.position, distance * Time.fixedDeltaTime);
 
             // Calculate the desired rotation based on the tank's velocity
-            tankVelocity = tankRigidbody.linearVelocity;
+            tankVelocity = tankRigidbody.velocity;
 
             // If the tank isn't moving, default to looking forwards
             // Prevents camera from freaking out with a zero velocity getting put into a Quaternion.LookRotation
