@@ -253,7 +253,7 @@ namespace UnityTank.Scripts
             GetMovementInput();
 
             // Calculate current speed along the tank's forward axis
-            forwardSpeed = Vector3.Dot(transform.forward, rigidBody.velocity);
+            forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity);
             speedFactor = Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(forwardSpeed)); // Normalized speed factor
 
             // Reduce motor torque at high speeds for better handling
