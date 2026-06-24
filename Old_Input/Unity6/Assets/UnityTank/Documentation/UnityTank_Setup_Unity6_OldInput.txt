@@ -1,0 +1,84 @@
+UnityTank - Setup Guide for Unity 6 (Old Input System)
+Version: Generalized, Model-Agnostic
+License: MIT (same as scripts)
+
+1. Project Setup
+
+- Use Unity 6 LTS
+- No extra packages needed for input
+- Make sure you are using and have enabled the "Legacy" Input System instead of "New" Input System
+- Add provided folder in Assets i.e.: Assets/UnityTank/
+- Scripts are housed in folder: Assets/UnityTank/Scripts
+- Input related scripts are housed in folder: Assets/UnityTank/Input
+
+2. Scene Hierarchy
+
+Tank (Root with Rigidbody "you must add Rigidbody component")
+├── Turret
+│   └── Barrel
+├── Tracks (parent)
+│   ├── LeftTrack (MeshRenderers)
+│   └── RightTrack (MeshRenderers)
+├── WheelColliders (parent)
+│   ├── LeftWheels (WheelColliders)
+│   └── RightWheels (WheelColliders)
+├── WheelMeshes (parent)
+│   ├── LeftWheels (WheelMeshes)
+│   └── RightWheels (WheelMeshes)
+└── CameraRoot
+    └── Main Camera
+
+3. Attach Scripts
+
+- Attach TankControl.cs to Tank root
+- Attach TankCamera.cs to CameraRoot
+
+4. Inspector Setup
+
+- Tank Tracks: 2 entries, mark left/right
+- Track Wheels: Assign 9 left + 9 right (WheelCollider + Mesh + motorized) Note: "9 per side may not be the amount depending on your model so adjust as such for example if there are 7 on each side then instead do same as suggested but for the correct amount for your model"
+- Tank Properties: Adjust mass, CoG, torque, etc.
+- Turret & Barrel: Assign transforms
+- Track Properties: Shader settings
+
+5. Input
+
+Uses legacy Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Mouse, Space for brake.
+
+6. Camera Setup
+
+Assign Tank Transform in TankCamera inspector.
+
+Note: You can also view the Tank Camera setup file for further information related to camera script setup.
+
+
+7. Further Notes:
+
+Note: Make sure to set up the wheel colliders and meshes correctly in the Unity Editor, and adjust the properties based on your tank's design and performance requirements for optimal results.
+
+Note: For each wheel collider you need to edit the "Transform" for the "Position Y" and add "+0.15" to the value of what the wheel mesh value is. This is to ensure that the wheel mesh is visually aligned with the wheel collider for proper visuals during movement. Adjust this value as needed based on your specific tank model and wheel setup.
+
+
+8. Recommended WheelCollider Suspension Settings (for heavy tank ~9000kg)
+
+Apply to ALL WheelColliders:
+
+Suspension Distance: 0.35 - 0.45
+Suspension Spring: 35000
+Suspension Damper: 4500
+Suspension Target Position: 0.5
+Wheel Radius: Match your mesh (e.g. 0.35-0.45)
+Wheel Mass: 80-120
+
+Forward Friction (Extremum/Asymptote):
+Extremum Slip: 0.4 / Value: 1.2
+Asymptote Slip: 0.8 / Value: 0.8
+
+Sideways Friction:
+Extremum Slip: 0.2 / Value: 1.5
+Asymptote Slip: 0.4 / Value: 1.2
+
+For detailed notes, refer to script comments.
+
+
+Final Note: These scripts are provided to be used as a base "as is" and then such is expected that the end user will then expand upon and improve such to their needs and desires.
