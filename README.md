@@ -1,5 +1,51 @@
 # Unity-BasicTankTrackScrolling
 
+Description: Add basic tank track scrolling by example(s) for your unity project. 
+
+
+Tank Controls:
+--------------
+
+* Tank Forward: W
+* Tank Reverse: S
+* Tank Turn Left: A
+* Tank Turn Right: D
+* Tank Brake: Space
+* Turret: Mouse X
+* Barrel: Mouse Y
+* Cursor Lock: Mouse Button Right (To access Turret and Barrel Movement)
+
+
+Manual Setup Instruction:
+-------------------------
+
+Simply follow the linkages found below for documentation information / instruction respective to the version say for example either Unity 2021+ & Unity 2022+ or Unity 6....
+
+Old_Input_System Variants:
+
+
+* Unity 6 => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/Old_Input/Unity6/Assets/UnityTank/Documentation/UnityTank_Setup_Unity6_OldInput.txt
+
+* Unity 6 => docs > Tank Camera: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/Old_Input/Unity6/Assets/UnityTank/Documentation/TankCameraSetup.txt
+
+* Unity 2021+ & 2022+ => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/Old_Input/Unity2021-2022/Assets/UnityTank/Documentation/UnityTank_Setup_Unity2021-2022_OldInput.txt
+
+* Unity 2021+ & 2022+ => docs > Tank Camera: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/Old_Input/Unity2021-2022/Assets/UnityTank/Documentation/TankCameraSetup.txt
+
+
+New_Input_System Variants:
+
+
+* Unity 6 => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity6/Assets/UnityTank/Documentation/UnityTank_Setup_Unity6_NewInput.txt
+
+* Unity 6 => docs > Tank Camera: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity6/Assets/UnityTank/Documentation/TankCameraSetup.txt
+
+* Unity 2021+ & 2022+ => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity2021-2022/Assets/UnityTank/Documentation/UnityTank_Setup_Unity2021-2022_NewInput.txt
+
+* Unity 2021+ & 2022+ => docs > Tank Camera: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity2021-2022/Assets/UnityTank/Documentation/TankCameraSetup.txt
+
+
+
 Release Intentions Note:
 ------------------------
 
