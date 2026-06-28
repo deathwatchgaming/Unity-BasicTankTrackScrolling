@@ -340,6 +340,13 @@ namespace UnityTank.Scripts
 					leftWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when changing direction
 					leftWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking when changing direction
  				}
+
+                // Apply braking when brake key is pressed and no movement input (neutral)
+                if (isBrakingKey && Mathf.Approximately(motorInput, 0f))
+                {
+                    leftWheel.wheelCollider.motorTorque = 0f;
+                    leftWheel.wheelCollider.brakeTorque = brakeTorque;
+                }
  			}
 
 			// Apply motor torque and braking to each wheel
@@ -381,6 +388,13 @@ namespace UnityTank.Scripts
 					rightWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when changing direction
 					rightWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking when changing direction
  				}
+                
+                // Apply braking when brake key is pressed and no movement input (neutral)
+                if (isBrakingKey && Mathf.Approximately(motorInput, 0f))
+                {
+                    rightWheel.wheelCollider.motorTorque = 0f;
+                    rightWheel.wheelCollider.brakeTorque = brakeTorque;
+                }                
  			}
         }        
 

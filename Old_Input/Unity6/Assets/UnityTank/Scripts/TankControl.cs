@@ -308,6 +308,13 @@ namespace UnityTank.Scripts
                     leftWheel.wheelCollider.motorTorque = 0f;
                     leftWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque;
                 }
+
+                // Apply braking when brake key is pressed and no movement input (neutral)
+                if (Input.GetKey(KeyCode.Space) && Mathf.Approximately(motorInput, 0f))
+                {
+                    leftWheel.wheelCollider.motorTorque = 0f;
+                    leftWheel.wheelCollider.brakeTorque = brakeTorque;
+                }                
             }
 
             // Apply motor torque and steering to the right wheels
@@ -347,6 +354,13 @@ namespace UnityTank.Scripts
                     // Apply brakes when reversing direction
                     rightWheel.wheelCollider.motorTorque = 0f;
                     rightWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque;
+                }
+
+                // Apply braking when brake key is pressed and no movement input (neutral)
+                if (Input.GetKey(KeyCode.Space) && Mathf.Approximately(motorInput, 0f))
+                {
+                    rightWheel.wheelCollider.motorTorque = 0f;
+                    rightWheel.wheelCollider.brakeTorque = brakeTorque;
                 }
             }
         }
