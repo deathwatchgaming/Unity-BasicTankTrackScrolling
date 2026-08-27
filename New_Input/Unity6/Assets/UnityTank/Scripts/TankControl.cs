@@ -19,11 +19,11 @@ using UnityEngine.InputSystem;
 // Define the namespace for the tank control script
 namespace UnityTank.Scripts
 {
-	public class TankControl : MonoBehaviour
-	{
+    public class TankControl : MonoBehaviour
+    {
         [Serializable]
         public struct Track
-        {            
+        {
             [Tooltip("The mesh renderer.")]
             // Note: The mesh renderer should be assigned in the Unity Editor to the corresponding track mesh for proper texture scrolling and visual representation of the tank's tracks.
             public MeshRenderer meshRenderer;
@@ -35,32 +35,32 @@ namespace UnityTank.Scripts
         }
 
         [Serializable]
-		public struct LeftWheel
-		{
-			[Tooltip("The wheel collider.")]
-			// The wheel collider is a special type of collider in Unity that simulates the physical behavior of a wheel, including its interaction with the terrain and its response to forces such as motor torque and braking. It is responsible for handling the physics calculations related to the wheel's movement and contact with the ground.
-			public WheelCollider wheelCollider;
-			[Tooltip("The wheel mesh.")]
-			// The wheel mesh is the visual representation of the wheel that will be updated to match the position and rotation of the corresponding wheel collider. This allows the tank's wheels to visually reflect their physical interactions with the terrain, such as rolling and steering.
-			public Transform wheelMesh;
-			[Tooltip("The motorized bool.")]
-			// The motorized boolean indicates whether this wheel should receive motor torque to propel the tank. Setting this to true allows the wheel to contribute to the tank's movement, while setting it to false means the wheel will only roll freely without providing any driving force.
-			public bool motorized;
-		}
+        public struct LeftWheel
+        {
+            [Tooltip("The wheel collider.")]
+            // The wheel collider is a special type of collider in Unity that simulates the physical behavior of a wheel, including its interaction with the terrain and its response to forces such as motor torque and braking. It is responsible for handling the physics calculations related to the wheel's movement and contact with the ground.
+            public WheelCollider wheelCollider;
+            [Tooltip("The wheel mesh.")]
+            // The wheel mesh is the visual representation of the wheel that will be updated to match the position and rotation of the corresponding wheel collider. This allows the tank's wheels to visually reflect their physical interactions with the terrain, such as rolling and steering.
+            public Transform wheelMesh;
+            [Tooltip("The motorized bool.")]
+            // The motorized boolean indicates whether this wheel should receive motor torque to propel the tank. Setting this to true allows the wheel to contribute to the tank's movement, while setting it to false means the wheel will only roll freely without providing any driving force.
+            public bool motorized;
+        }
 
-		[Serializable]
-		public struct RightWheel
-		{
-			[Tooltip("The wheel collider.")]
-			// The wheel collider is a special type of collider in Unity that simulates the physical behavior of a wheel, including its interaction with the terrain and its response to forces such as motor torque and braking. It is responsible for handling the physics calculations related to the wheel's movement and contact with the ground.
-			public WheelCollider wheelCollider;
-			[Tooltip("The wheel mesh.")]
-			// The wheel mesh is the visual representation of the wheel that will be updated to match the position and rotation of the corresponding wheel collider. This allows the tank's wheels to visually reflect their physical interactions with the terrain, such as rolling and steering.
-			public Transform wheelMesh;
-			[Tooltip("The motorized bool.")]
-			// The motorized boolean indicates whether this wheel should receive motor torque to propel the tank. Setting this to true allows the wheel to contribute to the tank's movement, while setting it to false means the wheel will only roll freely without providing any driving force.
-			public bool motorized;
-		}
+        [Serializable]
+        public struct RightWheel
+        {
+            [Tooltip("The wheel collider.")]
+            // The wheel collider is a special type of collider in Unity that simulates the physical behavior of a wheel, including its interaction with the terrain and its response to forces such as motor torque and braking. It is responsible for handling the physics calculations related to the wheel's movement and contact with the ground.
+            public WheelCollider wheelCollider;
+            [Tooltip("The wheel mesh.")]
+            // The wheel mesh is the visual representation of the wheel that will be updated to match the position and rotation of the corresponding wheel collider. This allows the tank's wheels to visually reflect their physical interactions with the terrain, such as rolling and steering.
+            public Transform wheelMesh;
+            [Tooltip("The motorized bool.")]
+            // The motorized boolean indicates whether this wheel should receive motor torque to propel the tank. Setting this to true allows the wheel to contribute to the tank's movement, while setting it to false means the wheel will only roll freely without providing any driving force.
+            public bool motorized;
+        }
 
         [Header("Tank Tracks")]
         [Tooltip("The track elements.")]
@@ -68,29 +68,29 @@ namespace UnityTank.Scripts
         [SerializeField] private List<Track> tracks = new List<Track>(new Track[2]);
 
         [Header("Track Wheels")]
-		[Tooltip("The left wheels.")]
-		// Initialize the leftWheels list with 9 default LeftWheel structs to ensure it has the correct size in the inspector
-		[SerializeField] private List<LeftWheel> leftWheels = new List<LeftWheel>(new LeftWheel[9]);
-		[Tooltip("The right wheels.")]
-		// Initialize the rightWheels list with 9 default RightWheel structs to ensure it has the correct size in the inspector
-		[SerializeField] private List<RightWheel> rightWheels = new List<RightWheel>(new RightWheel[9]);
+        [Tooltip("The left wheels.")]
+        // Initialize the leftWheels list with 9 default LeftWheel structs to ensure it has the correct size in the inspector
+        [SerializeField] private List<LeftWheel> leftWheels = new List<LeftWheel>(new LeftWheel[9]);
+        [Tooltip("The right wheels.")]
+        // Initialize the rightWheels list with 9 default RightWheel structs to ensure it has the correct size in the inspector
+        [SerializeField] private List<RightWheel> rightWheels = new List<RightWheel>(new RightWheel[9]);
 
-		[Header("Tank Properties")]
-		[Tooltip("The rigidbody mass amount.")]
-		// Set a default mass value for the rigidbody to ensure the tank has appropriate physics behavior
-		[SerializeField] private float rigidBodyMass = 9000f;
-		[Tooltip("The center of gravity offset amount.")]
-		// Set a default center of gravity offset value to lower the center of mass and improve stability, which helps prevent the tank from rolling over during sharp turns or on uneven terrain
-		[SerializeField] private float centerOfGravityOffset = -1f;
-		[Tooltip("The motor torque amount.")]
-		// Set a default motor torque value to ensure the tank has sufficient power to move and accelerate effectively
-		[SerializeField] private float motorTorque = 2000f;
-		[Tooltip("The brake torque amount.")]
-		// Set a default brake torque value to ensure the tank can decelerate and stop effectively when the brake is applied
-		[SerializeField] private float brakeTorque = 2000f;
-		[Tooltip("The maximum speed amount.")]
-		// Set a default maximum speed value to limit the tank's top speed, which helps maintain control and prevent excessive speeds that could lead to instability or loss of control
-		[SerializeField] private float maxSpeed = 10f;
+        [Header("Tank Properties")]
+        [Tooltip("The rigidbody mass amount.")]
+        // Set a default mass value for the rigidbody to ensure the tank has appropriate physics behavior
+        [SerializeField] private float rigidBodyMass = 9000f;
+        [Tooltip("The center of gravity offset amount.")]
+        // Set a default center of gravity offset value to lower the center of mass and improve stability, which helps prevent the tank from rolling over during sharp turns or on uneven terrain
+        [SerializeField] private float centerOfGravityOffset = -1f;
+        [Tooltip("The motor torque amount.")]
+        // Set a default motor torque value to ensure the tank has sufficient power to move and accelerate effectively
+        [SerializeField] private float motorTorque = 2000f;
+        [Tooltip("The brake torque amount.")]
+        // Set a default brake torque value to ensure the tank can decelerate and stop effectively when the brake is applied
+        [SerializeField] private float brakeTorque = 2000f;
+        [Tooltip("The maximum speed amount.")]
+        // Set a default maximum speed value to limit the tank's top speed, which helps maintain control and prevent excessive speeds that could lead to instability or loss of control
+        [SerializeField] private float maxSpeed = 10f;
 
         [Header("Turret Properies")]
         [Tooltip("Transform of the turret to rotate.")]
@@ -98,7 +98,7 @@ namespace UnityTank.Scripts
         [SerializeField] private Transform turretTransform;
         [Tooltip("Speed at which the turret rotates.")]
         // Speed at which the turret rotates based on mouse input
-        [SerializeField] private float rotationSpeed = 10f;
+        [SerializeField] private float rotationSpeed = 40f; // Increased for reliable Orbit mode compatibility with TankCameraPlus
 
         [Header("Barrel Properties")]
         [Tooltip("Transform of the barrel to lift.")]
@@ -106,7 +106,7 @@ namespace UnityTank.Scripts
         [SerializeField] private Transform barrelTransform;
         [Tooltip("Speed at which the barrel lifts up and down.")]
         // Speed at which the barrel lifts based on mouse input
-        [SerializeField] private float liftSpeed = 5f;
+        [SerializeField] private float liftSpeed = 20f; // Increased for reliable Orbit mode compatibility with TankCameraPlus
         [Tooltip("Maximum angle the barrel can lift up (in degrees).")]
         // Maximum angle the barrel can lift up from its initial position
         [SerializeField] private float maxLiftAngle = 1.5f;
@@ -130,20 +130,20 @@ namespace UnityTank.Scripts
 
         // Private variables for internal use
         private Rigidbody rigidBody;
-		private Vector3 centerOfMass;
-		private Vector3 leftWheelPosition;
-		private Quaternion leftWheelRotation;
-		private Vector3 rightWheelPosition;
-		private Quaternion rightWheelRotation;		
-		private TankInputActions tankControls; // Reference to the new input system
-		private Vector2 inputVector;	
-		private float motorInput;
-		private float steerInput;
-		private float forwardSpeed;
-		private float speedFactor;
-		private float currentMotorTorque;
-		private bool isAccelerating;
-		private bool isBrakingKey;
+        private Vector3 centerOfMass;
+        private Vector3 leftWheelPosition;
+        private Quaternion leftWheelRotation;
+        private Vector3 rightWheelPosition;
+        private Quaternion rightWheelRotation;
+        private TankInputActions tankControls; // Reference to the new input system
+        private Vector2 inputVector;
+        private float motorInput;
+        private float steerInput;
+        private float forwardSpeed;
+        private float speedFactor;
+        private float currentMotorTorque;
+        private bool isAccelerating;
+        private bool isBrakingKey;
 
         // Store the current and target angles for the barrel
         private float currentAngle = 0f;
@@ -155,6 +155,8 @@ namespace UnityTank.Scripts
         // Store rotation and lift input values
         private float rotationInput;
         private float liftInput;
+
+        private bool mouseInputInitialized = false;   // Flag for Orbit mode compatibility while preserving pre-lock safety
 
         // Variables to track the current offset for left and right tracks
         private float leftTrackOffset = 0f;
@@ -183,41 +185,41 @@ namespace UnityTank.Scripts
 
         // Awake is called when the script instance is being loaded	
         private void Awake()
-		{
-			// Create a new instance of the TankInputActions class
-			tankControls = new TankInputActions(); // Initialize Input Actions		
+        {
+            // Create a new instance of the TankInputActions class
+            tankControls = new TankInputActions(); // Initialize Input Actions		
         }
 
-		// Start is called before the first frame update
-		private void Start()
-		{
-			// Get the Rigidbody component
-			rigidBody = GetComponent<Rigidbody>();
+        // Start is called before the first frame update
+        private void Start()
+        {
+            // Get the Rigidbody component
+            rigidBody = GetComponent<Rigidbody>();
 
-			// Set the rigidbody mass
-			rigidBody.mass = rigidBodyMass; // Set the mass of the rigidbody to the specified value
+            // Set the rigidbody mass
+            rigidBody.mass = rigidBodyMass; // Set the mass of the rigidbody to the specified value
 
-			// Adjust center of mass to improve stability and prevent rolling
-			centerOfMass = rigidBody.centerOfMass; // Get the current center of mass
-			centerOfMass.y += centerOfGravityOffset; // Lower the center of mass by the specified offset to improve stability
-			rigidBody.centerOfMass = centerOfMass; // Apply the adjusted center of mass to the rigidbody
-		}
+            // Adjust center of mass to improve stability and prevent rolling
+            centerOfMass = rigidBody.centerOfMass; // Get the current center of mass
+            centerOfMass.y += centerOfGravityOffset; // Lower the center of mass by the specified offset to improve stability
+            rigidBody.centerOfMass = centerOfMass; // Apply the adjusted center of mass to the rigidbody
+        }
 
-		// Enable the input actions when the object is enabled
-		private void OnEnable()
-		{
-			tankControls.Enable();
-		}
+        // Enable the input actions when the object is enabled
+        private void OnEnable()
+        {
+            tankControls.Enable();
+        }
 
-		// Disable the input actions when the object is disabled
-		private void OnDisable()
-		{
-			tankControls.Disable();
-		}	
+        // Disable the input actions when the object is disabled
+        private void OnDisable()
+        {
+            tankControls.Disable();
+        }
 
-		// Update is called every frame
-		private void Update()
-		{
+        // Update is called every frame
+        private void Update()
+        {
             // Unlock the cursor and make it visible when the keyboard escape key is pressed
             if (Keyboard.current.escapeKey.wasPressedThisFrame) // equivalent to Input.GetKeyDown(KeyCode.Escape) // Escape is used to unlock the cursor
             {
@@ -234,11 +236,12 @@ namespace UnityTank.Scripts
                     // Lock the cursor to the center of the screen and hide it for better control
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
+                    mouseInputInitialized = true;
                 }
             }
 
-            // Check if the cursor is locked before processing input
-            else if (Cursor.lockState == CursorLockMode.Locked)
+            // Process mouse input for turret and barrel (now compatible with Orbit mode)
+            if (mouseInputInitialized && Cursor.lockState == CursorLockMode.Locked)
             {
                 // If the cursor is locked, get mouse input for controlling the turret and barrel
                 GetMouseInput();
@@ -254,9 +257,23 @@ namespace UnityTank.Scripts
             DoTrackScrolling();
         }
 
-		// FixedUpdate is called at a fixed time interval
-		private void FixedUpdate()
-		{
+        private void LateUpdate()
+        {
+            // Additional call for Orbit mode to ensure turret and barrel respond while camera is rotating
+            if (mouseInputInitialized && Cursor.lockState == CursorLockMode.Locked)
+            {
+                // If the cursor is locked, get mouse input for controlling the turret and barrel
+                GetMouseInput();
+
+                // Rotate the turret and lift the barrel based on mouse input
+                RotateTurret();
+                LiftBarrel();
+            }
+        }
+
+        // FixedUpdate is called at a fixed time interval
+        private void FixedUpdate()
+        {
             // Handle movement and wheel control in FixedUpdate for consistent physics behavior
             DoMovement();
             DoWheelControl();
@@ -264,17 +281,17 @@ namespace UnityTank.Scripts
             // Rotate the turret and lift the barrel based on mouse input
             RotateTurret();
             LiftBarrel();
-		}
+        }
 
         // Method to get player input for movement
         private void GetMovementInput()
         {
-			// Read the Vector2 input from the new Input System
-			inputVector = tankControls.Tank.Movement.ReadValue<Vector2>();
+            // Read the Vector2 input from the new Input System
+            inputVector = tankControls.Tank.Movement.ReadValue<Vector2>();
 
-			// Get player input for acceleration
-			motorInput = inputVector.y; // Forward / backward input
-			steerInput = inputVector.x; // Steering input		
+            // Get player input for acceleration
+            motorInput = inputVector.y; // Forward / backward input
+            steerInput = inputVector.x; // Steering input		
         }
 
         // Method to handle movement logic, including speed calculation and motor torque adjustment
@@ -283,15 +300,15 @@ namespace UnityTank.Scripts
             // Get player input for movement
             GetMovementInput();
 
-			// Calculate current speed along the tank's forward axis
-			forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity); // Speed in the forward direction
-			speedFactor = Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(forwardSpeed)); // Normalized speed factor
+            // Calculate current speed along the tank's forward axis
+            forwardSpeed = Vector3.Dot(transform.forward, rigidBody.linearVelocity); // Speed in the forward direction
+            speedFactor = Mathf.InverseLerp(0, maxSpeed, Mathf.Abs(forwardSpeed)); // Normalized speed factor
 
-			// Reduce motor torque and steering at high speeds for better handling
-			currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);
+            // Reduce motor torque and steering at high speeds for better handling
+            currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);
 
-			// Determine if the player is accelerating or trying to reverse
-			isAccelerating = Mathf.Sign(motorInput) == Mathf.Sign(forwardSpeed);
+            // Determine if the player is accelerating or trying to reverse
+            isAccelerating = Mathf.Sign(motorInput) == Mathf.Sign(forwardSpeed);
 
             // Determine turning direction based on steer input
             isTurnLeft = steerInput < 0f;
@@ -301,45 +318,45 @@ namespace UnityTank.Scripts
         // Method to apply motor torque and steering to the wheels
         private void DoWheelControl()
         {
-			// Apply motor torque and braking to each wheel
-			foreach (var leftWheel in leftWheels)
-			{
-				// Determine if the player is accelerating or trying to reverse
-				if (isAccelerating)
-				{
-					// Apply motor torque to motorized wheels
-					if (leftWheel.motorized)
-					{
-						leftWheel.wheelCollider.motorTorque = motorInput * currentMotorTorque; // Apply forward/backward torque
-						leftWheel.wheelCollider.motorTorque += motorTorque * steerInput; // Apply steering torque (positive for left, negative for right)
+            // Apply motor torque and braking to each wheel
+            foreach (var leftWheel in leftWheels)
+            {
+                // Determine if the player is accelerating or trying to reverse
+                if (isAccelerating)
+                {
+                    // Apply motor torque to motorized wheels
+                    if (leftWheel.motorized)
+                    {
+                        leftWheel.wheelCollider.motorTorque = motorInput * currentMotorTorque; // Apply forward/backward torque
+                        leftWheel.wheelCollider.motorTorque += motorTorque * steerInput; // Apply steering torque (positive for left, negative for right)
 
-						// Debug logs to check input values and motor torque
-						//Debug.Log($"Motor Input: {motorInput}, Steer Input: {steerInput}, Current Motor Torque: {currentMotorTorque}");
-					}
+                        // Debug logs to check input values and motor torque
+                        //Debug.Log($"Motor Input: {motorInput}, Steer Input: {steerInput}, Current Motor Torque: {currentMotorTorque}");
+                    }
 
-					// Apply braking if brake key is pressed
-					if (isBrakingKey)
-					{
-						// Apply brakes
-						leftWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when braking
-						leftWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking
-					}
+                    // Apply braking if brake key is pressed
+                    if (isBrakingKey)
+                    {
+                        // Apply brakes
+                        leftWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when braking
+                        leftWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking
+                    }
 
-					// Release brakes when accelerating and brake key is not pressed
-					else if (!isBrakingKey)
-					{
-						// Release brakes when accelerating
-						leftWheel.wheelCollider.brakeTorque = 0f; // Release brake torque to allow movement when accelerating
-					}										
- 				}
+                    // Release brakes when accelerating and brake key is not pressed
+                    else if (!isBrakingKey)
+                    {
+                        // Release brakes when accelerating
+                        leftWheel.wheelCollider.brakeTorque = 0f; // Release brake torque to allow movement when accelerating
+                    }
+                }
 
-				// Apply brakes when reversing direction
- 				else 
- 				{
-					// Apply brakes when reversing direction
-					leftWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when changing direction
-					leftWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking when changing direction
- 				}
+                // Apply brakes when reversing direction
+                else
+                {
+                    // Apply brakes when reversing direction
+                    leftWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when changing direction
+                    leftWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking when changing direction
+                }
 
                 // Apply braking when brake key is pressed and no movement input (neutral)
                 if (isBrakingKey && Mathf.Approximately(motorInput, 0f))
@@ -347,108 +364,121 @@ namespace UnityTank.Scripts
                     leftWheel.wheelCollider.motorTorque = 0f;
                     leftWheel.wheelCollider.brakeTorque = brakeTorque;
                 }
- 			}
+            }
 
-			// Apply motor torque and braking to each wheel
-			foreach (var rightWheel in rightWheels)
-			{
-				// Determine if the player is accelerating or trying to reverse
-				if (isAccelerating)
-				{
-					// Apply torque to motorized wheels
-					if (rightWheel.motorized)
-					{
-						rightWheel.wheelCollider.motorTorque = motorInput * currentMotorTorque; // Apply forward/backward torque
-						rightWheel.wheelCollider.motorTorque -= motorTorque * steerInput; // Apply steering torque (negative for right, positive for left)
+            // Apply motor torque and braking to each wheel
+            foreach (var rightWheel in rightWheels)
+            {
+                // Determine if the player is accelerating or trying to reverse
+                if (isAccelerating)
+                {
+                    // Apply torque to motorized wheels
+                    if (rightWheel.motorized)
+                    {
+                        rightWheel.wheelCollider.motorTorque = motorInput * currentMotorTorque; // Apply forward/backward torque
+                        rightWheel.wheelCollider.motorTorque -= motorTorque * steerInput; // Apply steering torque (negative for right, positive for left)
 
                         // Debug logs to check input values and motor torque
                         //Debug.Log($"Motor Input: {motorInput}, Steer Input: {steerInput}, Current Motor Torque: {currentMotorTorque}");
-					}
+                    }
 
-					// Apply braking if brake key is pressed
-					if (isBrakingKey)
-					{
-						// Apply brakes
-						rightWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when braking
-						rightWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking
-					}
+                    // Apply braking if brake key is pressed
+                    if (isBrakingKey)
+                    {
+                        // Apply brakes
+                        rightWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when braking
+                        rightWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking
+                    }
 
-					// Release brakes when accelerating and brake key is not pressed
+                    // Release brakes when accelerating and brake key is not pressed
                     else if (!isBrakingKey)
                     {
-						// Release brakes when accelerating
-						rightWheel.wheelCollider.brakeTorque = 0f; // Release brake torque to allow movement when accelerating
-					}										
- 				}
+                        // Release brakes when accelerating
+                        rightWheel.wheelCollider.brakeTorque = 0f; // Release brake torque to allow movement when accelerating
+                    }
+                }
 
-				// Apply brakes when reversing direction
- 				else 
- 				{
-					// Apply brakes when reversing direction
-					rightWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when changing direction
-					rightWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking when changing direction
- 				}
-                
+                // Apply brakes when reversing direction
+                else
+                {
+                    // Apply brakes when reversing direction
+                    rightWheel.wheelCollider.motorTorque = 0f; // Stop applying motor torque when changing direction
+                    rightWheel.wheelCollider.brakeTorque = Mathf.Abs(motorInput) * brakeTorque; // Apply brake torque proportional to the input for smoother braking when changing direction
+                }
+
                 // Apply braking when brake key is pressed and no movement input (neutral)
                 if (isBrakingKey && Mathf.Approximately(motorInput, 0f))
                 {
                     rightWheel.wheelCollider.motorTorque = 0f;
                     rightWheel.wheelCollider.brakeTorque = brakeTorque;
-                }                
- 			}
-        }        
+                }
+            }
+        }
 
-		// Update the wheel visuals
-		private void UpdateWheels()
-		{
-			// Update the position and rotation of each left wheel mesh to match the corresponding left wheel collider
-			foreach (var leftWheel in leftWheels)
-			{
-				// Get the Left Wheel collider's world pose values and
-				// use them to set the left wheel model's position and rotation
-				leftWheel.wheelCollider.GetWorldPose(out leftWheelPosition, out leftWheelRotation);
-				leftWheel.wheelMesh.transform.position = leftWheelPosition;
-				leftWheel.wheelMesh.transform.rotation = leftWheelRotation;
-			}
+        // Update the wheel visuals
+        private void UpdateWheels()
+        {
+            // Update the position and rotation of each left wheel mesh to match the corresponding left wheel collider
+            foreach (var leftWheel in leftWheels)
+            {
+                // Get the Left Wheel collider's world pose values and
+                // use them to set the left wheel model's position and rotation
+                leftWheel.wheelCollider.GetWorldPose(out leftWheelPosition, out leftWheelRotation);
+                leftWheel.wheelMesh.transform.position = leftWheelPosition;
+                leftWheel.wheelMesh.transform.rotation = leftWheelRotation;
+            }
 
-			// Update the position and rotation of each right wheel mesh to match the corresponding right wheel collider
-			foreach (var rightWheel in rightWheels)
-			{
-				// Get the Right Wheel collider's world pose values and
-				// use them to set the right wheel model's position and rotation
-				rightWheel.wheelCollider.GetWorldPose(out rightWheelPosition, out rightWheelRotation);
-				rightWheel.wheelMesh.transform.position = rightWheelPosition;
-				rightWheel.wheelMesh.transform.rotation = rightWheelRotation;
-			}			
-		}
+            // Update the position and rotation of each right wheel mesh to match the corresponding right wheel collider
+            foreach (var rightWheel in rightWheels)
+            {
+                // Get the Right Wheel collider's world pose values and
+                // use them to set the right wheel model's position and rotation
+                rightWheel.wheelCollider.GetWorldPose(out rightWheelPosition, out rightWheelRotation);
+                rightWheel.wheelMesh.transform.position = rightWheelPosition;
+                rightWheel.wheelMesh.transform.rotation = rightWheelRotation;
+            }
+        }
 
         // Method to get mouse input for rotating the turret and lifting the barrel
         private void GetMouseInput()
         {
-            // Read the Vector2 input from the new Input System
+            // Raw mouse delta (independent of TankCameraPlus Orbit mode)
+            if (Mouse.current != null)
+            {
+                Vector2 rawDelta = Mouse.current.delta.ReadValue();
 
-            // Get mouse input for rotation and lifting
-            mouseInputVector = tankControls.Tank.TurretMovement.ReadValue<Vector2>();
+                // Store the horizontal mouse input for rotating the turret
+                rotationInput = rawDelta.x;
 
-            // Store the horizontal mouse input for rotating the turret
-            rotationInput = mouseInputVector.x;
+                // Store the vertical mouse input for lifting the barrel
+                liftInput = rawDelta.y;
+            }
 
-            // Store the vertical mouse input for lifting the barrel
-            liftInput = mouseInputVector.y;
+            else
+            {
+                rotationInput = 0f;
+                liftInput = 0f;
+            }
         }
 
         // Method to rotate the turret based on mouse input
         private void RotateTurret()
         {
             // Rotate the turret based on mouse input
-            turretTransform.Rotate(0, rotationInput * rotationSpeed * Time.fixedDeltaTime, 0);
+            turretTransform.Rotate(0, rotationInput * rotationSpeed * Time.deltaTime, 0);
         }
 
         // Method to lift the barrel based on mouse input
         private void LiftBarrel()
         {
+            // Store original input before inversion
+            float verticalInput = liftInput;
+
             // Invert the input if the option is enabled
-            liftInput = invertMouseY ? -liftInput : liftInput; 
+            if (invertMouseY)
+            {
+                verticalInput = -liftInput;
+            }
 
             // Calculate the new angle for the barrel
             currentAngle = barrelTransform.localEulerAngles.x;
@@ -460,7 +490,7 @@ namespace UnityTank.Scripts
             }
 
             // Calculate the target angle based on input and clamp it within the specified limits
-            targetAngle = Mathf.Clamp(currentAngle + liftInput * liftSpeed * Time.fixedDeltaTime, minLiftAngle, maxLiftAngle);
+            targetAngle = Mathf.Clamp(currentAngle + verticalInput * liftSpeed * Time.deltaTime, minLiftAngle, maxLiftAngle);
 
             // Apply the new angle to the barrel
             barrelTransform.localEulerAngles = new Vector3(targetAngle, 0, 0);
