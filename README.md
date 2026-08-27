@@ -24,9 +24,13 @@ Simply follow the linkages found below for documentation information / instructi
 Old_Input_System Variants:
 
 
+Unity 6:
+
 * Unity 6 => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/Old_Input/Unity6/Assets/UnityTank/Documentation/UnityTank_Setup_Unity6_OldInput.txt
 
 * Unity 6 => docs > Tank Camera: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/Old_Input/Unity6/Assets/UnityTank/Documentation/TankCameraSetup.txt
+
+Unity 2021+ & 2022+:
 
 * Unity 2021+ & 2022+ => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/Old_Input/Unity2021-2022/Assets/UnityTank/Documentation/UnityTank_Setup_Unity2021-2022_OldInput.txt
 
@@ -36,9 +40,20 @@ Old_Input_System Variants:
 New_Input_System Variants:
 
 
+Unity 6:
+
 * Unity 6 => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity6/Assets/UnityTank/Documentation/UnityTank_Setup_Unity6_NewInput.txt
 
+Tank Camera: (optional usage - this or the other or none is up to you)
+
 * Unity 6 => docs > Tank Camera: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity6/Assets/UnityTank/Documentation/TankCameraSetup.txt
+
+Tank Camera Plus: (optional usage - this or the other or none is up to you)
+
+* Unity 6 => docs > Tank Camera Plus: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity6/Assets/UnityTank/Documentation/TankCameraPlusSetup.txt
+
+
+Unity 2021+ & 2022+:
 
 * Unity 2021+ & 2022+ => docs > Tank Control: https://github.com/deathwatchgaming/Unity-BasicTankTrackScrolling/blob/main/New_Input/Unity2021-2022/Assets/UnityTank/Documentation/UnityTank_Setup_Unity2021-2022_NewInput.txt
 
